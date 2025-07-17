@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div className="home">
       <Header />
-      <SliderBanner />
-       <img src="/assets/banners/headphone_image.png" alt="Banner" />
+      
+       
     </div>
   );
 }
