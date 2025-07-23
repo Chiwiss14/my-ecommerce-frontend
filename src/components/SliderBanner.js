@@ -40,7 +40,7 @@ const SliderBanner = () => {
             id: 3,
             tag: 'Exclusive Deals!',
             headline: 'Home Essentials - Upgrade Your Living Space!',
-            subheadline: 'Find everything you need for a comfortable and stylish home.',
+            subheadline: 'everything you need for a comfortable and stylish home.',
             imageUrl: '/assets/banners/recliner-chair-sofa.jpg',
             altText: 'Cozy home interior with essentials',
             buttonPrimary: { text: 'Shop Home Decor', link: '/products/home' },
@@ -66,26 +66,28 @@ const SliderBanner = () => {
         {bannerImages.map((slide) => (
           <div key={slide.id} className="relative !flex items-center justify-between p-6 md:p-10 lg:p-16 h-full box-border">
             {/* Using !flex to override slick's default inline-block */}
-            <div className="flex-1 pr-4 md:pr-8 text-left z-10">
+            <div className="flex-1 pr-0 md:pr-8 text-center md:text-left z-10 w-full md:w-auto">
               <span className="inline-block bg-quickbuyAccent text-white px-2.5 py-1.5 rounded-md text-sm font-semibold mb-3 md:mb-4">
                 {slide.tag}
               </span>
-              <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-quickbuyDark leading-tight mb-3 md:mb-4">
+              <h1 className="text-1xl md:text-3xl lg:text-5xl font-bold text-quickbuyDark leading-tight mb-2 md:mb-4">
                 {slide.headline}
               </h1>
-              <p className="text-base md:text-lg text-quickbuyGray mb-6 md:mb-8">
+              <p className="text-base md:text-lg text-quickbuyGray mb-4 md:mb-6">
                 {slide.subheadline}
               </p>
-              <div className="flex flex-col md:flex-row gap-4">
-                <Link href={slide.buttonPrimary.link} className="inline-block bg-quickbuyPrimary text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-700 transition duration-300 shadow-md text-center">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center md:justify-start">
+                <Link href={slide.buttonPrimary.link} className="inline-block bg-quickbuyPrimary text-indigo px-4 py-2 rounded-lg font-bold transition duration-300 shadow-md text-center text-sm md:text-base
+                  hover:bg-orange-700 hover:scale-105 hover:shadow-lg w-full md:w-auto">
                     {slide.buttonPrimary.text}
                 </Link>
-                <Link href={slide.buttonSecondary.link} className="inline-block bg-transparent text-quickbuyPrimary border-2 border-quickbuyPrimary px-6 py-3 rounded-lg font-bold hover:bg-quickbuyPrimary hover:text-white transition duration-300 text-center">
+                <Link href={slide.buttonSecondary.link} className="inline-block bg-transparent text-quickbuyPrimary border-2 border-quickbuyPrimary px-3 py-1 rounded-lg font-bold transition duration-300 text-center text-xs md:text-sm
+                  hover:bg-quickbuyPrimary hover:text-black hover:scale-105 hover:shadow-lg hover:border-transparent w-full md:w-auto">
                     {slide.buttonSecondary.text} &rarr;
                 </Link>
               </div>
             </div>
-            <div className="relative flex-1 flex justify-center items-center h-[200px] md:h-[300px] lg:h-[400px]">
+            <div className="relative flex-1 flex justify-center items-center h-[150px] items-center h-[200px] md:h-[300px] lg:h-[400px] mt-4 md:mt-0">
               <Image
                 src={slide.imageUrl}
                 alt={slide.altText}
