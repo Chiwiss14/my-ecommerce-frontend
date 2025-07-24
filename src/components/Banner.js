@@ -8,7 +8,7 @@ const Banner = () => {
         className="max-w-56"
         src="/assets/products/jbl_soundbox_image.png"
         alt="jbl_soundbox_image"
-        width={300}
+        width={256}
         height={300}
       />
       <div className="flex flex-col items-center justify-center text-center space-y-2 px-4 md:px-0">
@@ -20,15 +20,15 @@ const Banner = () => {
         </p>
         <button className="group flex items-center justify-center gap-1 px-12 py-2.5 bg-orange-600 rounded text-white">
           Buy now
-          <Image className="group-hover:translate-x-1 transition" src="/assets/products/arrow_icon_white.svg" width={14} height={14} alt="arrow_icon_white" />
+          <Image className="group-hover:translate-x-1 transition" src="/assets/products/arrow_icon_white.svg" width={15} height={11} alt="arrow_icon_white" />
         </button>
       </div>
       <Image
         className="hidden md:block max-w-80"
         src="/assets/products/md_controller_image.png"
         alt="md_controller_image"
-        width={200}
-        height={250}
+        width={384}
+        height={363}
       />
       <Image
         className=" h-48 w-full md:hidden"

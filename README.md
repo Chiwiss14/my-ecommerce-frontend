@@ -158,3 +158,9 @@ body {
         </a>
       </footer>
     </div>
+
+    <img
+                            src={slide.url}
+                            alt={`Banner ${slide.id}`}
+                            className="w-full h-full object-contain"
+                        />

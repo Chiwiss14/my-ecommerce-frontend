@@ -33,7 +33,7 @@ const SliderBanner = () => {
             subheadline: 'Trendy apparel, shoes, and accessories for every occasion.',
             imageUrl: '/assets/banners/headphone_image.png',
             altText: 'Stylish fashion apparel',
-            buttonPrimary: { text: 'Browse Fashion', link: '/products/fashion' },
+            buttonPrimary: { text: 'Browse Fashion', link: '//products/fashion' },
             buttonSecondary: { text: 'View All Categories', link: '/categories' },
         },
         {
@@ -56,21 +56,21 @@ const SliderBanner = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 5000, // 5 seconds
+        autoplaySpeed: 4000, // 4 seconds
         arrows: false,
     };
 
     return (
-    <div className="relative w-full max-w-7xl mx-auto my-5 overflow-hidden rounded-lg bg-quickbuyLightGray min-h-[350px] aspect-[16/7] md:min-h-[400px] lg:min-h-[500px]">
+    <div className="relative w-full max-w-7xl mx-auto my-5 overflow-hidden rounded-lg bg-[#E6E9F2] min-h-[350px] aspect-[16/7] md:min-h-[400px] lg:min-h-[500px]">
       <SliderDynamic {...settings}>
         {bannerImages.map((slide) => (
           <div key={slide.id} className="relative !flex items-center justify-between p-6 md:p-10 lg:p-16 h-full box-border">
             {/* Using !flex to override slick's default inline-block */}
             <div className="flex-1 pr-0 md:pr-8 text-center md:text-left z-10 w-full md:w-auto">
-              <span className="inline-block bg-quickbuyAccent text-white px-2.5 py-1.5 rounded-md text-sm font-semibold mb-3 md:mb-4">
+              <span className="inline-block bg-quickbuyAccent text-indigo-600 px-2.5 py-1.5 rounded-md text-sm font-semibold mb-1 md:mb-2">
                 {slide.tag}
               </span>
-              <h1 className="text-1xl md:text-3xl lg:text-5xl font-bold text-quickbuyDark leading-tight mb-2 md:mb-4">
+              <h1 className="text-1xl md:text-3xl lg:text-5xl font-semibold text-quickbuyDark leading-tight mb-1 md:mb-2">
                 {slide.headline}
               </h1>
               <p className="text-base md:text-lg text-quickbuyGray mb-4 md:mb-6">

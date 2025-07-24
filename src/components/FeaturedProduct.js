@@ -22,7 +22,7 @@ const products = [
   },
 ];
 
-const FeaturedProduct =() =>{
+const FeaturedProduct = () =>{
     return (
     <div className="mt-14">
       <div className="flex flex-col items-center">
@@ -43,6 +43,9 @@ const FeaturedProduct =() =>{
               <p className="text-sm lg:text-base leading-5 max-w-60">
                 {description}
               </p>
+              <button className="flex items-center gap-1.5 bg-orange-600 px-4 py-2 rounded">
+                Buy now <Image className="h-3 w-3" src="/assets/products/arrow_icon_white.svg" width={15} height={15} alt="Redirect Icon" />
+              </button>
               
             </div>
           </div>

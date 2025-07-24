@@ -7,6 +7,7 @@ import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductGrid from "@/components/ProductGrid";
 import products from "../data/products";
 import Banner from "@/components/Banner";
+import NewsLatter from "@/components/NewsLatter";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <ProductGrid products={products} />
         <FeaturedProduct />
         <Banner />
+        <NewsLatter />
       </div>
       
 
