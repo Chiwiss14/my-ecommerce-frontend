@@ -1,5 +1,9 @@
+"use client";
+
 import React, { useState } from 'react';
-import axios from 'axios'; // or use fetch if preferred
+import axios from 'axios';
+
+const API_URL = 'https://my-ecommerce-backend-fzsl.onrender.com/api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -13,16 +17,15 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await axios.post('https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin', {
+      const res = await axios.post("https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin", {
         email,
-        password
+        password,
       });
 
       if (res.data.success) {
-        // Save token or user data
         localStorage.setItem('token', res.data.token);
         alert('Login successful!');
-        // Redirect or navigate to dashboard
+        // Optional: Redirect or update app state here
       } else {
         setError(res.data.message || 'Login failed');
       }
@@ -83,22 +86,28 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divider & Social buttons unchanged... */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-t" />
           <span className="mx-4 text-gray-400">or</span>
           <hr className="flex-grow border-t" />
         </div>
 
-        {/* Social logins... */}
         <div className="space-y-3">
           <button className="flex items-center justify-center border border-gray-300 rounded-xl py-2 w-full hover:bg-gray-50">
-            <image src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon" className="w-5 h-5 mr-3" />
+            <img
+              src="https://developers.google.com/identity/images/g-logo.png"
+              alt="Google icon"
+              className="w-5 h-5 mr-3"
+            />
             <span className="text-sm font-medium text-gray-700">Continue with Google</span>
           </button>
 
           <button className="flex items-center justify-center border border-gray-300 rounded-xl py-2 w-full hover:bg-gray-50">
-            <image src="https://upload.wikimedia.org/wikipedia/commons/9/95/Twitter_new_X_logo.png" alt="X icon" className="w-5 h-5 mr-3" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/95/Twitter_new_X_logo.png"
+              alt="X icon"
+              className="w-5 h-5 mr-3"
+            />
             <span className="text-sm font-medium text-gray-700">Continue with X</span>
           </button>
         </div>
