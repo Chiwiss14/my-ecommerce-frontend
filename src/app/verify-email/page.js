@@ -38,7 +38,7 @@ export default function VerifyEmail() {
 
     try {
       const res = await fetch(`https://my-ecommerce-backend-fzsl.onrender.com/api/auth/send-verification-code`, { // <-- Verify this endpoint matches your authRouter.js
-        method: 'POST',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: targetEmail }),
       });
@@ -74,7 +74,7 @@ export default function VerifyEmail() {
 
     try {
       const res = await fetch(`https://my-ecommerce-backend-fzsl.onrender.com/api/auth/verify-verification-code`, { // <-- Verify this endpoint matches your authRouter.js
-        method: 'POST',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code }),
       });
