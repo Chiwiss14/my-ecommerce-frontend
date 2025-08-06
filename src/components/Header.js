@@ -19,6 +19,7 @@ const Header = () => {
           <Link href="/deals" className="hover:text-indigo-600">
             Deals
           </Link>
+          { /* contact */}
           <Link href="/contact" className="hover:text-indigo-600">
             Contact
           </Link>
