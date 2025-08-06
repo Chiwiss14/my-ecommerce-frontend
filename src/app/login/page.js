@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
-import axios from 'axios'; // or use fetch if preferred
+import axios from 'axios';
+
+const API_URL = 'https://my-ecommerce-backend-fzsl.onrender.com/api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -14,16 +16,15 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await axios.post('https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin', {
+      const res = await axios.post("https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin", {
         email,
-        password
+        password,
       });
 
       if (res.data.success) {
-        // Save token or user data
         localStorage.setItem('token', res.data.token);
         alert('Login successful!');
-        // Redirect or navigate to dashboard
+        // Optional: Redirect or update app state here
       } else {
         setError(res.data.message || 'Login failed');
       }
@@ -85,7 +86,6 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Divider & Social buttons unchanged... */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-t" />
           <span className="mx-4 text-gray-400">or</span>
