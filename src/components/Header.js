@@ -46,15 +46,18 @@ const Header = () => {
             </span>
           </button>
 
-          {/* Auth Buttons */}
+          {/* Login Button */}
           <Link
-            href="https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin"
+            href="/login"
             className="text-sm font-medium text-gray-700 hover:text-indigo-600"
           >
             Login
           </Link>
+
+          {/* Sign Up Button */}
+
           <Link
-            href="https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signup"
+            href="/signup"
             className="text-sm font-medium text-white bg-indigo-600 px-4 py-2 rounded hover:bg-indigo-500"
           >
             Sign Up
