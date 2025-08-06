@@ -14,16 +14,8 @@ export default function Home() {
   return (
     <div className="home">
       <Header />
-      <div className="px-6 md:px-16 lg:px-32">
-        <SliderBanner />
-        <ProductGrid products={products} />
-        <FeaturedProduct />
-        <Banner />
-        <NewsLatter />
-      </div>
-      <Footer />
       
-
+       
     </div>
   );
 }
