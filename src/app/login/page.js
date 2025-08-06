@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import axios from 'axios'; // or use fetch if preferred
 
@@ -49,7 +50,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="mt-1 w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 "
               required
             />
           </div>
@@ -71,7 +72,8 @@ export default function Login() {
               <input type="checkbox" className="rounded" />
               <span>Remember me</span>
             </label>
-            <a href="#" className="text-blue-600 hover:underline">Forgot password?</a>
+            {/* Use Next.js Link for navigation */}
+            <a href="/forgot-password" className="text-blue-600 hover:underline">Forgot password?</a>
           </div>
 
           <button
@@ -90,22 +92,10 @@ export default function Login() {
           <hr className="flex-grow border-t" />
         </div>
 
-        {/* Social logins... */}
-        <div className="space-y-3">
-          <button className="flex items-center justify-center border border-gray-300 rounded-xl py-2 w-full hover:bg-gray-50">
-            <image src="https://developers.google.com/identity/images/g-logo.png" alt="Google icon" className="w-5 h-5 mr-3" />
-            <span className="text-sm font-medium text-gray-700">Continue with Google</span>
-          </button>
-
-          <button className="flex items-center justify-center border border-gray-300 rounded-xl py-2 w-full hover:bg-gray-50">
-            <image src="https://upload.wikimedia.org/wikipedia/commons/9/95/Twitter_new_X_logo.png" alt="X icon" className="w-5 h-5 mr-3" />
-            <span className="text-sm font-medium text-gray-700">Continue with X</span>
-          </button>
-        </div>
-
+       
         <p className="mt-6 text-center text-gray-600 text-sm">
-          Don’t have an account?{' '}
-          <a href="#" className="text-blue-600 font-semibold hover:underline">Register</a>
+          {/* Use Next.js Link for navigation */}
+          <a href="/register" className="text-blue-600 font-semibold hover:underline">Register</a>
         </p>
       </div>
     </div>
