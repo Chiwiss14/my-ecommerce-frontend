@@ -4,19 +4,19 @@ import Image from "next/image";
 const products = [
   {
     id: 1,
-    url: '/assets/products/girl_with_headphone_image.png',
-    title: "Unparalleled Sound",
+    url: 'https://res.cloudinary.com/dvd0oxqc4/image/upload/v1755090365/upload/product-1755090364726',
+    title: "Television",
     description: "Experience crystal-clear audio with premium headphones.",
   },
   {
     id: 2,
-    url: '/assets/products/girl_with_earphone_image.png',
-    title: "Stay Connected",
+    url: 'https://res.cloudinary.com/dvd0oxqc4/image/upload/v1755090286/upload/product-1755090286574',
+    title: "BAGS",
     description: "Compact and stylish earphones for every occasion.",
   },
   {
     id: 3,
-    url: '/assets/products/boy_with_laptop_image.png',
+    url: 'https://res.cloudinary.com/dvd0oxqc4/image/upload/v1755089430/upload/product-1755089429844',
     title: "Power in Every Pixel",
     description: "Shop the latest laptops for work, gaming, and more.",
   },

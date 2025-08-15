@@ -1,3 +1,4 @@
+import { Link } from "lucide-react";
 import React from "react";
 
 const Header = () => {
@@ -9,10 +10,8 @@ const Header = () => {
 
         {/* Nav Links - Desktop */}
         <nav className="hidden md:flex space-x-6 text-gray-700">
-          <a href="/" className="hover:text-indigo-600">Home</a>
-          <a href="/shop" className="hover:text-indigo-600">Shop</a>
-          <a href="/deals" className="hover:text-indigo-600">Deals</a>
-          <a href="/contact" className="hover:text-indigo-600">Contact</a>
+          <Link href="/" className="hover:text-indigo-600">Homme</Link>
+          <Link href="/contact" className="hover:text-indigo-600">Contact</Link>
         </nav>
 
         {/* Right-side buttons */}

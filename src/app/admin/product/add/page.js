@@ -8,9 +8,6 @@ export default function AddProductPage() {
     price: "",
     description: "",
     stock: "",
-    ratings: "",
-    comment: "",
-    numberOfReviews: "",
     category: "",
     image: null, // file
   });
@@ -30,10 +27,7 @@ export default function AddProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.price || !formData.description || !formData.image || !formData.category || !formData.ratings || !formData.comment || !formData.numberOfReviews) {
-      toast.error("All fields are required.");
-      return;
-    }
+    // ... (Your validation code remains the same)
 
     const data = new FormData();
     data.append("name", formData.name);
@@ -41,18 +35,33 @@ export default function AddProductPage() {
     data.append("description", formData.description);
     data.append("image", formData.image);
     data.append("category", formData.category);
-    data.append("ratings", formData.ratings);   
-    data.append("comment", formData.comment);
-    data.append("numberOfReviews", formData.numberOfReviews);
+    data.append("stock", formData.stock);
 
     try {
       setLoading(true);
       toast.loading("Adding product...");
 
-      const res = await fetch("http://localhost:5000/api/products", {
-        method: "POST",
-        body: data,
-      });
+      const token = localStorage.getItem("token");
+
+      // ✅ Crucial check: Exit if no token is found
+      if (!token) {
+        toast.dismiss();
+        toast.error("You are not logged in. Please log in to add products.");
+        setLoading(false);
+        return; // Stop execution here
+      }
+
+      const res = await fetch(
+        "https://my-ecommerce-backend-fzsl.onrender.com/api/admin/product/new",
+        {
+          method: "POST",
+          headers: {
+            // Send the token in the Authorization header
+            Authorization: `Bearer ${token}`,
+          },
+          body: data,
+        }
+      );
 
       toast.dismiss();
 
@@ -68,9 +77,7 @@ export default function AddProductPage() {
         price: "",
         description: "",
         stock: "",
-        ratings: "",
-        comment: "",
-        numberOfReviews: "",
+        category: "",
         image: null,
       });
     } catch (error) {
@@ -89,7 +96,9 @@ export default function AddProductPage() {
       </h2>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="block text-sm text-gray-300 mb-1">Product Name</label>
+          <label className="block text-sm text-gray-300 mb-1">
+            Product Name
+          </label>
           <input
             name="name"
             value={formData.name}
@@ -112,7 +121,9 @@ export default function AddProductPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-200 mb-1">Image</label>
+          <label className="block text-sm font-medium text-gray-200 mb-1">
+            Image
+          </label>
           <input
             type="file"
             name="image"
@@ -128,7 +139,9 @@ export default function AddProductPage() {
         </div>
 
         <div>
-          <label className="block text-sm text-gray-300 mb-1">Description</label>
+          <label className="block text-sm text-gray-300 mb-1">
+            Description
+          </label>
           <textarea
             name="description"
             rows={4}
@@ -149,35 +162,14 @@ export default function AddProductPage() {
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-300 mb-1">Ratings</label>
+          <label className="block text-sm text-gray-300 mb-1">Stock</label>
           <input
-            name="ratings"
+            name="stock"
             type="number"
-            value={formData.ratings}
+            value={formData.stock}
             onChange={handleChange}
             className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-400"
-            placeholder="Input ratings"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-300 mb-1">Comment</label>
-          <input
-            name="comment"
-            value={formData.comment}
-            onChange={handleChange}
-            className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-400"
-            placeholder="Input comment"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-300 mb-1">Number of Reviews</label>
-          <input
-            name="numberOfReviews"
-            type="number"
-            value={formData.numberOfReviews}
-            onChange={handleChange}
-            className="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-pink-400"
-            placeholder="Input number of reviews"
+            placeholder="Input stock quantity"
           />
         </div>
 

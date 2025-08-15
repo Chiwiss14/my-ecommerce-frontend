@@ -6,6 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import DashboardCard from "@/components/DashboardCard";
 
+
 export default function AdminDashboard() {
   return (
     <div className="space-y-6">
@@ -50,4 +51,6 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
+
 }
+
