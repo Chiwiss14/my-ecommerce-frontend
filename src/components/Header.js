@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Link } from "lucide-react";
 import React from "react";
 
 const Header = () => {

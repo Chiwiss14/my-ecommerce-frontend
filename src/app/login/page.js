@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import axios from 'axios'; // or use fetch if preferred
+import { useAuth } from "@/context/AuthContext";
+import { toast, Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -47,6 +51,7 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-r bg-gray-100 px-4 flex items-center justify-center p-4">
       {/* Add the Toaster component here */}
       <Toaster />
+
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Welcome Back
