@@ -4,33 +4,40 @@ import React, { useState } from 'react';
 import axios from 'axios'; // or use fetch if preferred
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await axios.post('https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin', {
-        email,
-        password
-      });
-
+      const res = await axios.post(
+        "https://my-ecommerce-backend-fzsl.onrender.com/api/auth/signin",
+        {
+          email,
+          password,
+        }
+      );
       if (res.data.success) {
-        // Save token or user data
-        localStorage.setItem('token', res.data.token);
-        alert('Login successful!');
-        // Redirect or navigate to dashboard
-      } else {
-        setError(res.data.message || 'Login failed');
+        login(res.data.user, res.data.token);
+
+        toast.success("Login successful!");
+
+        if (res.data.user.role === "admin") {
+          router.push("/admin"); // admin dashboard
+        } else {
+          router.push("/"); // landing page
+        }
       }
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'An error occurred');
+      toast.error(err.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -38,14 +45,22 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r bg-gray-100 px-4 flex items-center justify-center p-4">
+      {/* Add the Toaster component here */}
+      <Toaster />
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Welcome Back
+        </h2>
 
-        {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}
+        {error && (
+          <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
+        )}
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Email Address</label>
+            <label className="block text-sm font-semibold text-gray-700">
+              Email Address
+            </label>
             <input
               type="email"
               value={email}
@@ -57,7 +72,9 @@ export default function Login() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700">Password</label>
+            <label className="block text-sm font-semibold text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               value={password}
@@ -73,7 +90,9 @@ export default function Login() {
               <input type="checkbox" className="rounded" />
               <span>Remember me</span>
             </label>
-            <a href="#" className="text-blue-600 hover:underline">Forgot password?</a>
+            <a href="#" className="text-blue-600 hover:underline">
+              Forgot password?
+            </a>
           </div>
 
           <button
@@ -81,11 +100,10 @@ export default function Login() {
             disabled={loading}
             className="w-full py-2.5 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        {/* Divider & Social buttons unchanged... */}
         <div className="flex items-center my-6">
           <hr className="flex-grow border-t" />
           <span className="mx-4 text-gray-400">or</span>
@@ -94,8 +112,10 @@ export default function Login() {
 
 
         <p className="mt-6 text-center text-gray-600 text-sm">
-          Don’t have an account?{' '}
-          <a href="#" className="text-blue-600 font-semibold hover:underline">Register</a>
+          Don’t have an account?{" "}
+          <a href="#" className="text-blue-600 font-semibold hover:underline">
+            Register
+          </a>
         </p>
       </div>
     </div>

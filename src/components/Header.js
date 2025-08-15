@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Link } from "lucide-react";
 import React from "react";
 
 const Header = () => {
@@ -23,6 +24,8 @@ const Header = () => {
           <Link href="/contact" className="hover:text-indigo-600">
             Contact
           </Link>
+          <Link href="/" className="hover:text-indigo-600">Homme</Link>
+          <Link href="/contact" className="hover:text-indigo-600">Contact</Link>
         </nav>
 
         {/* Right-side buttons */}

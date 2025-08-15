@@ -1,23 +1,39 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ProductCard from "./ProductCard"; // ✅ The card for one product
 
-const ProductCard = ({ product }) => {
+const ProductsGrid = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://my-ecommerce-backend-fzsl.onrender.com/api/products")
+      .then((response) => {
+        console.log("API response:", response.data); // 👀 Check what comes back
+        setProducts(
+          Array.isArray(response.data)
+            ? response.data
+            : response.data.products || []
+        );
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        setProducts([]); // so it doesn't stay stuck loading
+      });
+  }, []);
+
   return (
-    <div className="border rounded-md shadow hover:shadow-lg transition p-4 flex flex-col">
-      <img 
-        src={product.image} 
-        alt={product.name} 
-        className="h-48 w-full object-cover rounded mb-4" 
-      />
-      <h2 className="text-lg font-semibold mb-1">{product.name}</h2>
-      <p className="text-gray-500 mb-2">{product.description}</p>
-      <div className="mt-auto flex justify-between items-center">
-        <span className="text-green-600 font-bold">₦{product.price}</span>
-        <button className="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 text-sm">
-          Buy Now
-        </button>
-      </div>
+    <div className="product-grid">
+      {products.length > 0 ? (
+        products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))
+      ) : (
+        <p>Loading products...</p>
+      )}
     </div>
   );
 };
 
-export default ProductCard;
+export default ProductsGrid;
