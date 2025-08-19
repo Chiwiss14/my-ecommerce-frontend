@@ -1,39 +1,22 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ProductCard from "./ProductCard"; // ✅ The card for one product
+import Image from "next/image";
+// import ProductCard from "./ProductCard"; // ✅ The card for one product
 
-const ProductsGrid = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://my-ecommerce-backend-fzsl.onrender.com/api/products")
-      .then((response) => {
-        console.log("API response:", response.data); // 👀 Check what comes back
-        setProducts(
-          Array.isArray(response.data)
-            ? response.data
-            : response.data.products || []
-        );
-      })
-      .catch((error) => {
-        console.error("Error fetching products:", error);
-        setProducts([]); // so it doesn't stay stuck loading
-      });
-  }, []);
+const ProductCard = ({product}) => {
+ console.log(product)
+  
 
   return (
     <div className="product-grid">
-      {products.length > 0 ? (
-        products.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))
-      ) : (
-        <p>Loading products...</p>
-      )}
+      <div key={product.id} className="product-card">
+           { product?.image&&<Image src={product.image} alt={product.name} height={100} width={100} />}
+            <h3>{product?.name}</h3>
+            <p>${product?.price}</p>
+             </div>
     </div>
   );
 };
 
-export default ProductsGrid;
+export default ProductCard;
