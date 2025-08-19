@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
       <SliderBanner />
       <FeaturedProduct products={products} />
-      <ProductGrid products={products} />
+      <ProductGrid />
       <Banner />
       <Footer />
     </div>
