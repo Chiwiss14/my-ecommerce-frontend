@@ -1,7 +1,12 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const { user, logout } = useAuth();
+  const router = useRouter();
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -13,11 +18,20 @@ const Header = () => {
           <Link href="/" className="hover:text-indigo-600">
             Home
           </Link>
-         
-          { /* contact */}
+
+          {/* contact */}
           <Link href="/contact" className="hover:text-indigo-600">
             Contact
           </Link>
+
+          {/* ✅ Conditionally render the Dashboard link */}
+          {user?.role === "admin" && (
+            <Link href="/admin">
+              <span className="text-gray-800 hover:text-blue-600 font-semibold cursor-pointer">
+                Dashboard
+              </span>
+            </Link>
+          )}
         </nav>
 
         {/* Right-side buttons */}
