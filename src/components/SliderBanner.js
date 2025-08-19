@@ -11,9 +11,6 @@ const SliderDynamic = dynamic(() => import('react-slick'), {
 });
 
 
-
-
-
 const SliderBanner = () => {
     const bannerImages = [
         {
