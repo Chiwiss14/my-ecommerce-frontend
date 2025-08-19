@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Image from "next/image";
 
 import PaystackCheckout from './PaystackCheckout'; // ✅ Import the component

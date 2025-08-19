@@ -1,3 +1,4 @@
+"use client";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -7,9 +8,7 @@ import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductGrid from "@/components/ProductGrid";
 import products from "../data/products";
 import Banner from "@/components/Banner";
-import NewsLatter from "@/components/NewsLatter";
 import Footer from "@/components/Footer";
-import PaystackCheckout from "../components/PaystackCheckout"; // ✅ Import the component
 
 
 export default function Home() {
@@ -20,9 +19,6 @@ export default function Home() {
       <FeaturedProduct products={products} />
       <ProductGrid products={products} />
       <Banner />
-      <NewsLatter />
-
-
       <Footer />
     </div>
   );

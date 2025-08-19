@@ -1,5 +1,5 @@
-// pages/verify-email.js
-"use client"; // If you're using Next.js App Router and this is a Client Component
+export const dynamic = "force-dynamic";
+"use client"
 
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'; // For Next.js App Router
