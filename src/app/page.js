@@ -9,6 +9,8 @@ import products from "../data/products";
 import Banner from "@/components/Banner";
 import NewsLatter from "@/components/NewsLatter";
 import Footer from "@/components/Footer";
+import PaystackCheckout from "../components/PaystackCheckout"; // ✅ Import the component
+
 
 export default function Home() {
   return (
@@ -16,9 +18,11 @@ export default function Home() {
       <Header />
       <SliderBanner />
       <FeaturedProduct products={products} />
-      <ProductGrid />
+      <ProductGrid products={products} />
       <Banner />
       <NewsLatter />
+
+
       <Footer />
     </div>
   );
