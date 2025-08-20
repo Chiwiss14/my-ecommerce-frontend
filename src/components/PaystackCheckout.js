@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -7,29 +6,30 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 const PaystackCheckout = ({ product }) => {
-  // ✅ Ensure product is provided
+  // ✅ All hooks must be called at the top of the function
+  const { user } = useAuth();
+  const router = useRouter();
+
+  // ✅ Use optional chaining to safely access 'product.price'
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: user?.email || "customer@example.com",
+    amount: product?.price ? product.price * 100 : 0, 
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+  };
+  
+  // ✅ Call the hook after 'config' is defined
+  const initializePayment = usePaystackPayment(config);
+
+  // ❌ Now, you can add your conditional return
   if (!product) {
     console.error("PaystackCheckout component requires a 'product' prop.");
     return null;
   }
 
-  const { user } = useAuth();
-  const router = useRouter();
-
-  const config = {
-    reference: new Date().getTime().toString(),
-    email: user?.email || "customer@example.com",
-    amount: product.price * 100, // Paystack requires kobo (NGN * 100)
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
-  };
-
-  const initializePayment = usePaystackPayment(config);
-
   const onSuccess = async (reference) => {
     console.log("✅ Payment success:", reference);
-
     try {
-      // Send reference to backend for verification
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/payment/verify`,
         {
@@ -38,10 +38,9 @@ const PaystackCheckout = ({ product }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ reference, productId: product._id }),
-          credentials: "include", // include cookies if needed
+          credentials: "include", 
         }
       );
-
       const data = await res.json();
       if (res.ok) {
         router.push("/payment-success");
@@ -59,7 +58,6 @@ const PaystackCheckout = ({ product }) => {
     console.log("⚠ Payment modal closed");
   };
 
-  // ✅ Return the Buy button
   return (
     <button
       onClick={() => initializePayment(onSuccess, onClose)}
