@@ -1,15 +1,22 @@
 "use client";
 
-import React from "react";
-import { usePaystackPayment } from "react-paystack";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 const PaystackCheckout = ({ product }) => {
   // ✅ All hooks must be called at the top of the function
   const { user } = useAuth();
-  const router = useRouter();
+  const [paystackHook, setPaystackHook] =useState(null);
 
+  const router = useRouter();
+   useEffect(() => {
+    // Import dynamically on the client
+    import("react-paystack").then((mod) => {
+      setPaystackHook(() => mod.usePaystackPayment);
+    });
+  }, []);
+    if (!paystackHook) return null; // or a loader while waiting
   // ✅ Use optional chaining to safely access 'product.price'
   const config = {
     reference: new Date().getTime().toString(),
@@ -19,7 +26,7 @@ const PaystackCheckout = ({ product }) => {
   };
   
   // ✅ Call the hook after 'config' is defined
-  const initializePayment = usePaystackPayment(config);
+  const initializePayment = paystackHook(config);
 
   // ❌ Now, you can add your conditional return
   if (!product) {
