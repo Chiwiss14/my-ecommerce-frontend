@@ -5,7 +5,7 @@ const nextConfig = {
   },
 
   experimental: {
-    optimizeCss: false, // force Next.js + Tailwind to use PostCSS instead of LightningCSS
+    optimizeCss: false, // Disable LightningCSS optimization
   },
 };
 
