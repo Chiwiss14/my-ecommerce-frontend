@@ -4,9 +4,6 @@ const nextConfig = {
     domains: ["res.cloudinary.com", "example.com"],
   },
 
-  experimental: {
-    optimizeCss: false, // Disable LightningCSS optimization
-  },
 };
 
 export default nextConfig;
