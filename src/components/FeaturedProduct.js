@@ -44,7 +44,7 @@ const FeaturedProduct = () =>{
                 {description}
               </p>
               <button className="flex items-center gap-1.5 bg-orange-600 px-4 py-2 rounded">
-                Buy now <Image className="h-3 w-3" src="/assets/products/arrow_icon_white.svg" width={15} height={15} alt="Redirect Icon" />
+                Buy now <Image className="h-3 w-3" src="/assets/products/arrow_icon_white.svg" width={50} height={50} alt="Redirect Icon" />
               </button>
               
             </div>

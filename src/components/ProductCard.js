@@ -1,29 +1,31 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import Image from "next/image";
-
-import PaystackCheckout from './PaystackCheckout'; // ✅ Import the component
-
+import PaystackCheckout from './PaystackCheckout';
 
 const ProductCard = ({ product }) => {
-  console.log(product);
-   if (!product) {
+  if (!product) {
     return null;
   }
+
   return (
-    <div className="product-grid">
-      <div key={product.id} className="product-card">
-        {product?.image && (
+    <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+      {product?.image && (
+        <div className="relative w-full h-48">
           <Image
             src={product.image}
             alt={product.name}
-            height={100}
-            width={100}
+            layout="fill"
+            objectFit="contain"
+            className="p-4"
           />
-        )}
-        <h3>{product?.name}</h3>
-        <p>${product?.price}</p>
-        {/* ✅ Add the PaystackCheckout component here, passing the product data */}
+        </div>
+      )}
+      <div className="p-4 flex flex-col justify-between">
+        <h3 className="text-lg font-semibold text-gray-800 mb-1">{product?.name}</h3>
+        <span className="text-sm text-gray-500 mb-2">{product?.category}</span>
+        <p className="text-xl font-bold text-indigo-600 mb-4">${product?.price}</p>
         <PaystackCheckout product={product} />
       </div>
     </div>

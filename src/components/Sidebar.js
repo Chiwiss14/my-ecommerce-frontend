@@ -15,10 +15,10 @@ import { ChevronDown, ChevronUp } from "lucide-react"; // Arrow icons
 
 export default function Sidebar() {
   const [showProduct, setShowProduct] = useState(false);
-<div></div>
+  <div></div>;
   return (
     <aside className="w-64 bg-gray-800 p-4 space-y-4">
-      <div className="text-xl font-bold text-pink-400">🛒 ShopAdmin</div>
+      <div className="text-xl font-bold text-pink-400">🛒 QuickBuyAdmin</div>
 
       <nav className="flex flex-col gap-2">
         <Link
@@ -47,17 +47,25 @@ export default function Sidebar() {
             >
               <PackagePlus size={16} /> Add Product
             </Link>
+
             <Link
-              href="/admin/product/update"
+              href={`/admin/product/update?id=${product._id}`} // ✅ Corrected path with ID
               className="flex items-center gap-2 text-white hover:text-pink-300"
             >
               <PackageCheck size={16} /> Update Product
             </Link>
             <Link
-              href="/admin/product/delete"
+              href={`/admin/product/delete?id=${product._id}`} // ✅ Corrected path with ID
               className="flex items-center gap-2 text-white hover:text-pink-300"
             >
               <PackageX size={16} /> Delete Product
+            </Link>
+
+            <Link
+              href="/admin/product"
+              className="flex items-center gap-2 text-white hover:text-pink-300"
+            >
+              <Package size={16} /> View Products
             </Link>
           </div>
         )}

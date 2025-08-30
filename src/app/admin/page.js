@@ -5,11 +5,12 @@
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import DashboardCard from "@/components/DashboardCard";
-
+import AdminProductsPage from "@/components/AdminProductsPage"; // ✅ Import the component
 
 export default function AdminDashboard() {
   return (
     <div className="space-y-6">
+      {/* Existing dashboard cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <DashboardCard title="Total Orders" value="1,587" trend="+11%" />
         <DashboardCard title="Revenue" value="$12,430" trend="+6%" />
@@ -17,6 +18,10 @@ export default function AdminDashboard() {
         <DashboardCard title="Products" value="234" trend="+4%" />
       </div>
 
+      {/* ✅ Add the list of all products here */}
+      <AdminProductsPage />
+
+      {/* Existing recent transactions table */}
       <div className="bg-gray-800 p-4 rounded-xl shadow">
         <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
         <div className="overflow-x-auto">
@@ -51,6 +56,4 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
-
 }
-
