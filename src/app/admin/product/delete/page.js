@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios"; // ✅ Use axios for cleaner requests
+import { useAuth } from "@/context/AuthContext"; // ✅ Import useAuth to get the token
+
 
 export default function DeleteProductPage() {
   const router = useRouter();
@@ -37,7 +39,7 @@ export default function DeleteProductPage() {
       setLoading(true);
       toast.loading("Deleting product...");
 
-      const res = await axios.delete(`https://my-ecommerce-backend-fzsl.onrender.com/admin/product/${productId}`);
+      const res = await axios.delete(`https://my-ecommerce-backend-fzsl.onrender.com/api/admin/product/${productId}`);
       toast.dismiss();
 
       if (res.status === 200) {

@@ -5,9 +5,11 @@ import axios from 'axios';
 import Link from 'next/link';
 import { toast, Toaster } from 'react-hot-toast';
 import { PackageCheck, PackageX } from "lucide-react";
-
+import { useAuth } from "@/context/AuthContext"; 
 
 const AdminProductsPage = () => {
+    // ✅ Get the token from your context
+    const { token } = useAuth(); 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -29,15 +31,28 @@ const AdminProductsPage = () => {
     }, []);
 
     const handleDelete = async (productId) => {
-        // ✅ Add a confirmation dialog
+        // ✅ Add a check for the token
+        if (!token) {
+            toast.error("Authentication token not found. Please log in again.");
+            return;
+        }
+        
         if (window.confirm("Are you sure you want to delete this product?")) {
             try {
-                await axios.delete(`https://my-ecommerce-backend-fzsl.onrender.com/admin/product/${productId}`);
+                // ✅ Add the authorization header to the delete request
+                await axios.delete(
+                    `https://my-ecommerce-backend-fzsl.onrender.com/api/admin/product/${productId}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
                 toast.success("Product deleted successfully!");
-                fetchProducts(); // Refresh the product list
+                fetchProducts(); 
             } catch (error) {
                 console.error("Error deleting product:", error);
-                toast.error("Failed to delete product.");
+                toast.error(error.response?.data?.message || "Failed to delete product.");
             }
         }
     };
@@ -69,7 +84,6 @@ const AdminProductsPage = () => {
                                 <td className="py-2 px-4 border-b">{product.name}</td>
                                 <td className="py-2 px-4 border-b">${product.price}</td>
                                 <td className="py-2 px-4 border-b text-center">
-                                    {/* ✅ REMOVED LINK AND ADDED ONCLICK */}
                                     <button
                                         onClick={() => handleDelete(product._id)}
                                         className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-colors"
