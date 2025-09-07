@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 const Header = () => {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false); // 👈 state for mobile menu
+
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -19,12 +21,10 @@ const Header = () => {
             Home
           </Link>
 
-          {/* contact */}
           <Link href="/contact" className="hover:text-indigo-600">
             Contact
           </Link>
 
-          {/* ✅ Conditionally render the Dashboard link */}
           {user?.role === "admin" && (
             <Link href="/admin">
               <span className="text-gray-800 hover:text-blue-600 font-semibold cursor-pointer">
@@ -56,15 +56,13 @@ const Header = () => {
             </span>
           </button>
 
-          {/* Login Button */}
+          {/* Auth buttons */}
           <Link
             href="/login"
             className="text-sm font-medium text-gray-700 hover:text-indigo-600"
           >
             Login
           </Link>
-
-          {/* Sign Up Button */}
 
           <Link
             href="/signup"
@@ -74,7 +72,10 @@ const Header = () => {
           </Link>
 
           {/* Hamburger for mobile */}
-          <button className="md:hidden">
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             <svg
               className="w-6 h-6 text-gray-700"
               fill="none"
@@ -91,6 +92,29 @@ const Header = () => {
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white shadow-md p-4 space-y-4">
+          <Link href="/" className="block text-gray-700 hover:text-indigo-600">
+            Home
+          </Link>
+          <Link
+            href="/contact"
+            className="block text-gray-700 hover:text-indigo-600"
+          >
+            Contact
+          </Link>
+          {user?.role === "admin" && (
+            <Link
+              href="/admin"
+              className="block text-gray-800 hover:text-blue-600 font-semibold"
+            >
+              Dashboard
+            </Link>
+          )}
+        </div>
+      )}
     </header>
   );
 };
